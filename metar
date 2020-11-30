@@ -1,0 +1,23 @@
+#!/bin/bash
+
+if [ "$#" -lt 2 ]
+then
+	echo "zadaj 2 argumenty: datum vo formate DD/MM/YYYY a stvorpisomenovy kod letiska"
+	exit 1
+fi 
+
+START=$(echo $1 | date -d $1 +%s)
+
+KONIEC=$(echo "$START"+24*60*60|bc)
+
+KOD="$2"
+
+URL='https://aviationweather.gov/adds/dataserver_current/httpparam?dataSource=metars&requestType=retrieve&format=csv&stationString='"$KOD"'&startTime='"$START"'&endTime='"$KONIEC"''
+
+curl -s $URL | sed 's/.*elevation_m//'
+
+
+
+
+
+
