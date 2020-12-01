@@ -1,0 +1,13 @@
+#!/bin/bash
+LINE="$1"
+
+while read LINE
+do 
+	CAS=$(echo "$LINE" | cut -f 6 -d , | cut -f 1 -d .)
+	TEPLOTA=$(echo "$LINE" | cut -f 3 -d ,| sed 's/.*T//' | sed 's/:00Z//'| tr ':' '-')
+	echo "$TEPLOTA" " " "$CAS"
+done
+
+cat <<THE_END
+e
+THE_END
